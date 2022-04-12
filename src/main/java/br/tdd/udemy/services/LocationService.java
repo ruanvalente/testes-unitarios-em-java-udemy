@@ -3,6 +3,9 @@ package br.tdd.udemy.services;
 import br.tdd.udemy.entities.Location;
 import br.tdd.udemy.entities.Movie;
 import br.tdd.udemy.entities.User;
+import br.tdd.udemy.utils.DataUtils;
+import org.junit.Assert;
+import org.junit.Test;
 
 import static br.tdd.udemy.utils.DataUtils.adicionarDias;
 
@@ -22,7 +25,8 @@ public class LocationService {
         return location;
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void test() {
         // scenery
         // TODO iniciar os objetos para o cenário correspondente ao teste
         LocationService locationService = new LocationService();
@@ -35,8 +39,11 @@ public class LocationService {
 
         // verification
         // TODO realizar a verificação referente ao resultado esperado dado o cenário + ação descritas para o teste
-        System.out.println(location.getValue());
-        System.out.println(location.getDateLocation());
-        System.out.println(location.getDateLocationReturn());
+//        System.out.println(location.getValue());
+//        System.out.println(location.getDateLocation());
+//        System.out.println(location.getDateLocationReturn());
+        Assert.assertEquals(150.90, location.getValue(), 0.0);
+        Assert.assertTrue(DataUtils.isMesmaData(location.getDateLocation(), new Date()));
+        Assert.assertTrue(DataUtils.isMesmaData(location.getDateLocationReturn(), DataUtils.obterDataComDiferencaDias(1)));
     }
 }
