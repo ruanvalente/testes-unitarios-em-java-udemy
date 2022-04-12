@@ -3,7 +3,9 @@ package br.tdd.udemy.services;
 import br.tdd.udemy.entities.Location;
 import br.tdd.udemy.entities.Movie;
 import br.tdd.udemy.entities.User;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ErrorCollector;
 
 import java.util.Date;
 
@@ -11,9 +13,11 @@ import static br.tdd.udemy.utils.DataUtils.isMesmaData;
 import static br.tdd.udemy.utils.DataUtils.obterDataComDiferencaDias;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 public class LocationServiceTest {
+    @Rule
+    public ErrorCollector error = new ErrorCollector();
+
     @Test
     public void test() {
         // scenery
@@ -28,8 +32,8 @@ public class LocationServiceTest {
 
         // verification
         // TODO realizar a verificação referente ao resultado esperado dado o cenário + ação descritas para o teste
-        assertThat(location.getValue(), 150.90, is(equalTo(150.90)));
-        assertThat(isMesmaData(location.getDateLocation(), new Date()), is(true));
-        assertThat(isMesmaData(location.getDateLocationReturn(), obterDataComDiferencaDias(1)), is(true));
+        error.checkThat(location.getValue(), is(equalTo(150.90)));
+        error.checkThat(isMesmaData(location.getDateLocation(), new Date()), is(true));
+        error.checkThat(isMesmaData(location.getDateLocationReturn(), obterDataComDiferencaDias(1)), is(true));
     }
 }
