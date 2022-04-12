@@ -4,12 +4,18 @@ import br.tdd.udemy.entities.Location;
 import br.tdd.udemy.entities.Movie;
 import br.tdd.udemy.entities.User;
 
+import java.rmi.server.ExportException;
 import java.util.Date;
+import java.util.Objects;
 
 import static br.tdd.udemy.utils.DataUtils.adicionarDias;
 
 public class LocationService {
-    public Location rentMovie(User user, Movie movie) {
+    public Location rentMovie(User user, Movie movie) throws ExportException {
+
+        if (Objects.equals(movie.getStock(), 0)) {
+            throw new ExportException("Filme sem estoque no momento");
+        }
         Location location = new Location();
         location.setMovie(movie);
         location.setUser(user);
