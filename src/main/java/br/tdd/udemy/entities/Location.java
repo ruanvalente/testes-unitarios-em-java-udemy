@@ -53,7 +53,7 @@ public class Location {
         this.dateLocationReturn = dateLocationReturn;
     }
 
-    public Double getValue() {
+    public String getValue() {
         return value;
     }
 
